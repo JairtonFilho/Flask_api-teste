@@ -4,15 +4,15 @@ from api.schemas import course_schema
 from flask import request, make_response, jsonify
 from api.entities import course_entity
 from api.services import course_service, formation_service
+from api.paginate import paginate
+from api.models.course_model import CourseModel
+
 
 class CourseView(Resource):
     def get(self):
 
         cs = course_schema.CourseSchema(many=True)
-        result = course_service.get_courses()
-        serialized_result = cs.dump(result)
-
-        return make_response(jsonify(serialized_result), 200)
+        return paginate(CourseModel, cs)
 
     def post(self):
         cs = course_schema.CourseSchema()
@@ -35,6 +35,7 @@ class CourseView(Resource):
             serialized_result = cs.dump(result)
 
             return make_response(jsonify(serialized_result), 201)
+
 
 class CourseByIdView(Resource):
     def get(self, id):
@@ -84,6 +85,7 @@ class CourseByIdView(Resource):
         cs = course_schema.CourseSchema()
         serialized_result = cs.dump(result)
         return make_response(jsonify(serialized_result), 200)
+
 
 api.add_resource(CourseView, '/course')
 api.add_resource(CourseByIdView, '/course/<int:id>')

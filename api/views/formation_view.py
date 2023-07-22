@@ -4,14 +4,14 @@ from api.schemas import formation_schema
 from flask import request, make_response, jsonify
 from api.entities import formation_entity
 from api.services import formation_service
+from api.paginate import paginate
+from api.models.formation_model import FormationModel
+
 
 class FormationView(Resource):
     def get(self):
         fs = formation_schema.FormationSchema(many=True)
-        result = formation_service.get_formations()
-        serialized_result = fs.dump(result)
-
-        return make_response(jsonify(serialized_result), 200)
+        return paginate(FormationModel, fs)
 
     def post(self):
         fs = formation_schema.FormationSchema()
@@ -28,6 +28,7 @@ class FormationView(Resource):
             serialized_result = fs.dump(result)
 
             return make_response(jsonify(serialized_result), 201)
+
 
 class FormationByIdView(Resource):
     def get(self, id):
@@ -71,6 +72,7 @@ class FormationByIdView(Resource):
         fs = formation_schema.FormationSchema()
         serialized_result = fs.dump(result)
         return make_response(jsonify(serialized_result), 200)
+
 
 api.add_resource(FormationView, '/formation')
 api.add_resource(FormationByIdView, '/formation/<int:id>')

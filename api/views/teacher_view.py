@@ -4,15 +4,14 @@ from api.schemas import teacher_schema
 from flask import request, make_response, jsonify
 from api.entities import teacher_entity
 from api.services import teacher_service
+from api.paginate import paginate
+from api.models.teacher_model import TeacherModel
 
 
 class TeacherView(Resource):
     def get(self):
         ts = teacher_schema.TeacherSchema(many=True)
-        result = teacher_service.get_teachers()
-        serialized_result = ts.dump(result)
-
-        return make_response(jsonify(serialized_result), 200)
+        return paginate(TeacherModel, ts)
 
     def post(self):
         ts = teacher_schema.TeacherSchema()
