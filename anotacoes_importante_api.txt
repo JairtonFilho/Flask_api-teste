@@ -1,0 +1,20 @@
+Kn*M^+{W
+
+entidades - arquivos que os scripts serão utilizados para recuperar os métodos getters e setters (retorna e alterar valores)
+models - modelo base das estruturas para criação da tabela
+views - lógica de negócio
+services - serve para fazer o meio de campo com as funções do ORM (vai ter os métodos CRUD que vai estar interagindo diretamente com o bd)
+schemas - vai receber os modelos e vai fazer validação
+
+bibliotecas
+- Flask
+- Flask-Migrate 2.5.2 - verificação de versionamento do banco
+- Flask-RESTful - ajuda na criação de API REST
+- SQLAlchemy - ORM que abstrai a linguagem sql
+- Flask-SQLAlchemy - interface SQLAlchemy
+- marshmallow-sqlalchemy - validação de dados
+- flask-marshmallow - validação
+- mysqlclient
+
+alteração que deve ser feita no terminal para o migration
+- precisa entrar na pasta venv do projeto, >Scripts>activate para ativar o ambiente virtual em seguida - set FLASK_API=api.py , em seguida volta para o diretorio raiz (APIFlask) - flask db init - para inicializar o diretorio de migração, depois flask db migrate, flask db upgrade - para criar a tabela diretamente no bd.
