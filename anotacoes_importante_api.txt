@@ -17,4 +17,8 @@ bibliotecas
 - mysqlclient
 
 alteração que deve ser feita no terminal para o migration
-- precisa entrar na pasta venv do projeto, >Scripts>activate para ativar o ambiente virtual em seguida - set FLASK_API=api.py , em seguida volta para o diretorio raiz (APIFlask) - flask db init - para inicializar o diretorio de migração, depois flask db migrate, flask db upgrade - para criar a tabela diretamente no bd.
+- precisa entrar na pasta venv do projeto, >Scripts>activate para ativar o ambiente virtual em seguida - set FLASK_API=api.py , em seguida volta para o diretorio raiz (APIFlask) - flask db init - para inicializar o diretorio de migração, depois flask db migrate, flask db upgrade - para criar a tabela diretamente no bd. desc nome_da_tabela -  para mostrar a tabela
+
+OBS: para relações de n para n criasse uma nova tabela para armazenar como chave primaria as chaves estrangeiras, no caso de professor a tabela de formação e na tabela de formação a chave estrangeira para professor
+
+HATEOAS é um modelo desenvolvido por Leonard Richardson que traz o modelo REST para um novo nível, e cujo objetivo é ajudar os clientes que consomem o serviço REST, ou seja, nossa Web API, a navegar pelos recursos e saber o que podem fazer tornado as ações da WEB API mais fáceis de entender.
