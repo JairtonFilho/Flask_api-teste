@@ -1,7 +1,5 @@
 from api import db
 
-
-
 class TeacherModel(db.Model):
     __tablename__ = 'teachers'
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)

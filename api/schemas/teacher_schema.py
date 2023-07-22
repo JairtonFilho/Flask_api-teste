@@ -19,4 +19,3 @@ class TeacherSchema(ma.SQLAlchemyAutoSchema):
             "delete": ma.URLFor("teacherview", values=dict(id="<id>"))
         }
     )
-    
