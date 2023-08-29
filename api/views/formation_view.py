@@ -6,13 +6,16 @@ from api.entities import formation_entity
 from api.services import formation_service
 from api.paginate import paginate
 from api.models.formation_model import FormationModel
+from flask_jwt_extended import jwt_required
 
 
 class FormationView(Resource):
+    @jwt_required()
     def get(self):
         fs = formation_schema.FormationSchema(many=True)
         return paginate(FormationModel, fs)
 
+    @jwt_required()
     def post(self):
         fs = formation_schema.FormationSchema()
         validate = fs.validate(request.json)
@@ -31,6 +34,7 @@ class FormationView(Resource):
 
 
 class FormationByIdView(Resource):
+    @jwt_required()
     def get(self, id):
         result = formation_service.get_formation_by_id(id)
         if not result:
@@ -42,6 +46,7 @@ class FormationByIdView(Resource):
 
         return make_response(jsonify(serialized_result), 200)
 
+    @jwt_required()
     def put(self, id):
         fs_bd = formation_service.get_formation_by_id(id)
         if not fs_bd:
@@ -63,6 +68,7 @@ class FormationByIdView(Resource):
 
             return make_response(jsonify(serialized_result), 200)
 
+    @jwt_required()
     def delete(self, id):
         result = formation_service.get_formation_by_id(id)
         if not result:

@@ -6,13 +6,16 @@ from api.entities import teacher_entity
 from api.services import teacher_service
 from api.paginate import paginate
 from api.models.teacher_model import TeacherModel
+from flask_jwt_extended import jwt_required
 
 
 class TeacherView(Resource):
+    @jwt_required()
     def get(self):
         ts = teacher_schema.TeacherSchema(many=True)
         return paginate(TeacherModel, ts)
 
+    @jwt_required()
     def post(self):
         ts = teacher_schema.TeacherSchema()
         validate = ts.validate(request.json)
@@ -30,6 +33,7 @@ class TeacherView(Resource):
 
 
 class TeacherByIdView(Resource):
+    @jwt_required()
     def get(self, id):
         result = teacher_service.get_teacher_by_id(id)
         if not result:
@@ -41,6 +45,7 @@ class TeacherByIdView(Resource):
 
         return make_response(jsonify(serialized_result), 200)
 
+    @jwt_required()
     def put(self, id):
         ts_bd = teacher_service.get_teacher_by_id(id)
         if not ts_bd:
@@ -61,6 +66,7 @@ class TeacherByIdView(Resource):
 
             return make_response(jsonify(serialized_result), 200)
 
+    @jwt_required()
     def delete(self, id):
         result = teacher_service.get_teacher_by_id(id)
         if not result:

@@ -4,10 +4,11 @@ from api.schemas import user_schema
 from flask import request, make_response, jsonify
 from api.entities import user_entity
 from api.services import user_service
+from flask_jwt_extended import jwt_required
 
 
 class UserView(Resource):
-
+    @jwt_required()
     def post(self):
         us = user_schema.UserSchema()
         validate = us.validate(request.json)

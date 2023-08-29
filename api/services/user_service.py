@@ -8,3 +8,6 @@ def add_user(user):
     db.session.add(user_bd)
     db.session.commit()
     return user_bd
+
+def get_user_by_email(email):
+    return user_model.UserModel.query.filter_by(email=email).first()

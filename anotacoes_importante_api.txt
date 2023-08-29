@@ -22,3 +22,8 @@ alteração que deve ser feita no terminal para o migration
 OBS: para relações de n para n criasse uma nova tabela para armazenar como chave primaria as chaves estrangeiras, no caso de professor a tabela de formação e na tabela de formação a chave estrangeira para professor
 
 HATEOAS é um modelo desenvolvido por Leonard Richardson que traz o modelo REST para um novo nível, e cujo objetivo é ajudar os clientes que consomem o serviço REST, ou seja, nossa Web API, a navegar pelos recursos e saber o que podem fazer tornado as ações da WEB API mais fáceis de entender.
+
+Segurança-
+flask-JWT-Extended: autenticação com acess token
+passlib: criptografia de senha
+Documentação- 

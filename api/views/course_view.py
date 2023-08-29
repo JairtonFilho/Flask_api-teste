@@ -6,14 +6,17 @@ from api.entities import course_entity
 from api.services import course_service, formation_service
 from api.paginate import paginate
 from api.models.course_model import CourseModel
+from flask_jwt_extended import jwt_required
 
 
 class CourseView(Resource):
+    @jwt_required()
     def get(self):
 
         cs = course_schema.CourseSchema(many=True)
         return paginate(CourseModel, cs)
 
+    @jwt_required()
     def post(self):
         cs = course_schema.CourseSchema()
         validate = cs.validate(request.json)
@@ -38,6 +41,7 @@ class CourseView(Resource):
 
 
 class CourseByIdView(Resource):
+    @jwt_required()
     def get(self, id):
         result = course_service.get_course_by_id(id)
         if not result:
@@ -49,6 +53,7 @@ class CourseByIdView(Resource):
 
         return make_response(jsonify(serialized_result), 200)
 
+    @jwt_required()
     def put(self, id):
         cs_bd = course_service.get_course_by_id(id)
         if not cs_bd:
@@ -76,6 +81,7 @@ class CourseByIdView(Resource):
 
             return make_response(jsonify(serialized_result), 200)
 
+    @jwt_required()
     def delete(self, id):
         result = course_service.get_course_by_id(id)
         if not result:
