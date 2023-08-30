@@ -25,5 +25,8 @@ HATEOAS é um modelo desenvolvido por Leonard Richardson que traz o modelo REST 
 
 Segurança-
 flask-JWT-Extended: autenticação com acess token
+Ao disponibilizar a api, deve ser configurado no front end Authorization com o acess token gerado no login
 passlib: criptografia de senha
+
 Documentação- 
+
