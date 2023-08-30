@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from api import api
+from api import api, jwt
 from api.schemas import login_schema
 from flask import request, make_response, jsonify
 from api.services import user_service
@@ -8,7 +8,15 @@ from datetime import timedelta
 
 
 class LoginView(Resource):
+    @jwt.additional_claims_loader
+    def add_claims_to_access_token(identity):
+        user_token = user_service.get_user_by_id(identity)
+        if user_token.is_admin:
+            roles = 'admin'
+        else:
+            roles = 'user'
 
+        return {'roles':roles}
     def post(self):
         ls = login_schema.LoginSchema()
         validate = ls.validate(request.json)
@@ -38,11 +46,7 @@ class LoginView(Resource):
 
             return make_response(jsonify({
                 'message': 'Invalid credentials'
-            }), 201)
-
-            serialized_result = ls.dump(result)
-
-            return make_response(jsonify(serialized_result), 201)
+            }), 401)
 
 
 api.add_resource(LoginView, '/login')

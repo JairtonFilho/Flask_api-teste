@@ -8,9 +8,10 @@ class UserModel(db.Model):
     name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), nullable=False)
     password = db.Column(db.String(255), nullable=False)
+    is_admin = db.Column(db.Boolean)
 
-    def password_encrypt(self, password):
-        self.password = pbkdf2_sha256.hash(password)
+    def password_encrypt(self):
+        self.password = pbkdf2_sha256.hash(self.password)
 
     def password_decrypt(self, password):
         return pbkdf2_sha256.verify(password, self.password)

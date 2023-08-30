@@ -4,11 +4,10 @@ from api.schemas import user_schema
 from flask import request, make_response, jsonify
 from api.entities import user_entity
 from api.services import user_service
-from flask_jwt_extended import jwt_required
 
 
 class UserView(Resource):
-    @jwt_required()
+
     def post(self):
         us = user_schema.UserSchema()
         validate = us.validate(request.json)
@@ -18,8 +17,11 @@ class UserView(Resource):
             name = request.json['name']
             email = request.json['email']
             password = request.json['password']
+            is_admin = request.json['is_admin']
 
-            new_user = user_entity.UserEntity(name=name, email=email, password=password)
+            print(is_admin)
+
+            new_user = user_entity.UserEntity(name=name, email=email, password=password, is_admin=is_admin)
             result = user_service.add_user(new_user)
             serialized_result = us.dump(result)
 

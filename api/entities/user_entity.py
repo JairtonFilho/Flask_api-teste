@@ -1,8 +1,9 @@
 class UserEntity:
-    def __init__(self, name, email, password):
+    def __init__(self, name, email, password, is_admin):
         self.name = name
         self.email = email
         self.password = password
+        self.is_admin = is_admin
 
     @property
     def name(self):
@@ -27,3 +28,11 @@ class UserEntity:
     @password.setter
     def password(self, password):
         self._password = password
+
+    @property
+    def is_admin(self):
+        return self._is_admin
+
+    @is_admin.setter
+    def is_admin(self, is_admin):
+        self._is_admin = is_admin
